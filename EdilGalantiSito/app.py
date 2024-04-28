@@ -3,23 +3,41 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
 db = SQLAlchemy()
+db = SQLAlchemy()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'superSecretKey'
 db.init_app(app)
 
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=True)
+    surname = db.Column(db.String(100), nullable=True)
+    birth_date = db.Column(db.String(50), nullable=True)
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        utente = User(request.form['username'], request.form['password'])
-        return "" + request.form['username'] + " : " + request.form['password']
-    else:
-        success = "Invalid"
+        name = request.form['name']
+        surname = request.form['surname']
+        birth_date = request.form['birth_date']
+        email = request.form['email']
+        password = request.form['password']
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            return "User already exists"
+
+        new_user = User(email=email, password=password, name=name, surname=surname, birth_date=birth_date)
+        db.session.add(new_user)
+        db.session.commit()
+        return 'index.html'
 
     return render_template('login.html')
 

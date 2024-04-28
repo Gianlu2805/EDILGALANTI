@@ -138,25 +138,25 @@
 
                         <!-- Registration name input -->
                         <div class="form-outline mb-4 visually-hidden" id="registrationNameContainer">
-                            <input type="text" id="registrationName" class="form-control form-control-lg" placeholder="First name" />
+                            <input type="text" id="registrationName" name="name" class="form-control form-control-lg" value="{{request.form.name}}" placeholder="First name" />
                             <label class="form-label" for="registrationName">Name</label>
                         </div>
 
                         <!-- Registration surname input -->
                         <div class="form-outline mb-4 visually-hidden" id="registrationSurnameContainer">
-                            <input type="text" id="registrationSurname" class="form-control form-control-lg" placeholder="Surname" />
+                            <input type="text" id="registrationSurname" name="surname" class="form-control form-control-lg" value="{{request.form.surname}}" placeholder="Surname" />
                             <label class="form-label" for="registrationSurname">Surname</label>
                         </div>
 
                         <!-- Registration date of birth input -->
                         <div class="form-outline mb-4 visually-hidden" id="registrationDateOfBirthContainer">
-                            <input type="date" id="registrationDateOfBirth" class="form-control form-control-lg" placeholder="Date of birth (dd/mm/yyyy)" />
+                            <input type="date" id="registrationDateOfBirth" name="birth_date" class="form-control form-control-lg" value="{{request.form.birth_date}}" placeholder="Date of birth (dd/mm/yyyy)" />
                             <label class="form-label" for="registrationDateOfBirth">Date of birth</label>
                         </div>
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="username" name="username" class="form-control form-control-lg"  value="{{request.form.username}}" placeholder="Enter a valid email address" />
+                            <input type="email" id="username" name="email" class="form-control form-control-lg" value="{{request.form.email}}" placeholder="Enter a valid email address" />
                             <label class="form-label" for="email">Email address</label>
                         </div>
 

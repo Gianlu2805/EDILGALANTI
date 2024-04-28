@@ -37,7 +37,7 @@ def login():
         new_user = User(email=email, password=password, name=name, surname=surname, birth_date=birth_date)
         db.session.add(new_user)
         db.session.commit()
-        return 'index.html'
+        return render_template('index.html')
 
     return render_template('login.html')
 
